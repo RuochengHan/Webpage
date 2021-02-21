@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% if title %}
+    <title>{{title}} - Ruocheng's Website</title>
+    {% else %}
+    <title>Ruocheng's Website</title>
+    {% endif %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="static/css/ghpages-materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="static/css/nouislider.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+    <script src="static/js/materialize.js" type="text/javascript"></script>
+    <script src="static/js/nouislider.js" type="text/javascript"></script>
+    
+    <style>
+    .tnr {font-family: "Times New Roman", Times, serif;}
+    </style>
+  </head>
+<body>
+
+
+    <!-- old version
+    <span> Up: <a href="/index"> Home</a> </span>  
+    <span> Current: <a href="/qc"> Refresh</a> </span>
+    <hr style="width:50%;text-align:left;margin-left:0">
+    -->
+
+    {% extends "base.html" %}
+    {% block content %}
+    <div class = "row container">
+    <h4 class = "center-align"> Diatomic System Quantum Chemistry Calculator</h4>
+    <form method="post" action="{{ url_for('qc_result') }}" id="calculator_form">
+        
+        <div class="col s4">
+        <label for="Atom1">Atom1:</label>
+        <input type="text" name="Atom1" id="Atom1">
+        </div>
+        <div class="col s4">
+        <label for="Atom2">Atom2:</label>
+        <input type="text" name="Atom2" id="Atom2">
+        </div>
+        <div class="col s4">
+        <label for="distance">Distance:</label>
+        <input type="text" name="distance" id="distance">
+        </div>
+
+
+        <div class="input-field col s3">
+          <select id="charge" name="charge">
+              <option value="0" selected>0</option>
+              <script language="JavaScript">
+              for (var i=1; i <=10; i++)
+              {
+	        document.write("<option value=" + i + ">+" + i + "</option>");
+	          document.write("<option value=" + -i + ">-" + i + "</option>");
+              }
+              </script>
+          </select>
+          <label for="charge">Charge</label>
+        </div>
+        
+        <div class="input-field col s3">        
+        <select id="spin" name="spin">
+            <script language="JavaScript">
+            for (var i=1; i <=10; i++)
+            {
+                document.write("<option value=" + i + ">" + i + "</option>");
+            }
+            $(document).ready(function(){
+              $('select').formSelect();
+            });
+            </script>
+        </select>
+        <label for="spin">Spin (2S+1)</label>
+        </div>
+       
+        <div class="input-field col s3">         
+          <select id="method" name="method">
+            <option value="HF" selected>HF</option>
+            <option value="MP2">MP2</option>
+            <option value="MP2.5">MP2.5</option>
+            <option value="MP4">MP4</option>
+            <option value="CCSD">CCSD</option>
+            <option value="CCSD(T)">CCSD(T)</option>
+          </select>
+        <label for="method">Method</label>
+        </div>
+        
+        <div class="input-field col s3">   
+        <select id="basis" name="basis">
+            <option value="cc-pVDZ" selected>cc-pVDZ</option>
+            <option value="aug-cc-pVDZ">aug-cc-pVDZ</option>
+            <option value="cc-pVTZ">cc-pVTZ</option>
+            <option value="aug-cc-pVTZ">aug-cc-pVTZ</option>
+            <option value="cc-pVQZ">cc-pVQZ</option>
+            <option value="aug-cc-pVQZ">aug-cc-pVQZ</option>
+        </select>
+        <label for="basis">Basis Set</label>
+        </div>
+
+
+        <div class="col s6">
+          <label for="cores">Cores</label>
+          <p id="s1" name="cores"></p>
+          <input type="hidden" id="cores" name="cores" value="">
+        </div>
+
+        <script>
+        var tapslider1 = document.getElementById('s1');
+          noUiSlider.create(tapslider1, {
+           start: 1,
+           behaviour: 'tap',
+           connect: [true, false],
+           step: 1,
+           orientation: 'horizontal',
+           range: {
+             'min': 1,
+             'max': 16,
+           },
+           //tooltips: [wNumb({decimals: 0})], not work
+           format: {
+             from: function(value) {
+               return parseInt(value);
+             },
+             to: function(value) {
+               return parseInt(value);
+             }
+           }
+        });
+
+        var cores = document.getElementById('cores');
+        tapslider1.noUiSlider.on('update', function( values, handle ) {
+          cores.value = values[handle];
+        });
+        </script>
+
+        <div class="col s6">
+          <label for="mem">Memory (GB)</label>
+          <p id="s2" name="mem"></p>
+          <input type="hidden" id="mem" name="mem" value="">
+        </div>
+
+        <script>
+        var tapslider2 = document.getElementById('s2');
+          noUiSlider.create(tapslider2, {
+           start: 1,
+           behaviour: 'tap',
+           connect: [true, false],
+           //snap: true,
+           orientation: 'horizontal',
+           range: {
+             'min': 1,
+             //'20%':4,
+             //'40%':8,
+             //'60%':16,
+             //'80%':32,
+             'max': 64,
+           },
+           //format: {
+           //  from: function(value) {
+           //    return parseInt(value);
+           //  },
+           //  to: function(value) {
+           //    return parseInt(value);
+           //  }
+           //}
+        });
+
+        var mem = document.getElementById('mem');
+        tapslider2.noUiSlider.on('update', function( values, handle ) {
+          mem.value = values[handle];
+        });
+
+        </script>
+
+        <br><br><br><br><br><br><br><br><br><br>
+        <div class="center-align col s12">
+        <button class="waves-effect waves-light btn" type="submit" name="submit">Submit
+          <i class="material-icons right">send</i>
+        </button>
+        &emsp;&emsp;&emsp;
+        <button class="waves-effect waves-light btn" type="reset" name="submit">Reset
+          <i class="material-icons right">restart_alt</i>
+        </button>
+        </div>
+    </form>
+    <br><br>
+
+
+
+    <div class="col s4 offset-s4"> 
+    {% if success == True %}
+        {% if isresult == True %}
+      <h5 class = "center-align">Summary</h5>
+      <table class="highlight">
+        <tbody>
+          <tr>
+            <th>System:</th>
+            <td class="center-align tnr">{{atom1}}-{{atom2}} @ [{{distance}}A]</td>
+          </tr>
+          <tr>
+            <th>Charge:</th>
+            <td class="center-align tnr">{{charge}}</td>
+          </tr>
+          <tr>
+            <th>Spin:</th>
+            <td class="center-align tnr">{{spin}}</td>
+          </tr>
+          <tr>
+            <th>Level:</th>
+            <td class="center-align tnr">{{method}}/{{basis}}</td>
+          </tr>
+          <tr>
+            <th>Energy:</th>
+            <td class="center-align tnr">{{result}} Hartree</td>
+          </tr>
+          <tr>
+            <th>Detail:</th>
+            <td class="center-align">
+    <form method="post" action="{{ url_for('qc_log') }}" id="calculator_form">
+        <button class="waves-effect waves-light btn-small red" type="submit" name="log">LOG</button>
+    </form></td>
+          </tr>
+        </tbody>
+      </table>
+        {% endif %}
+        {% if isresult == False %}
+            <h6 class = "center-align red-text">{{error}}</h6> <br/>
+            <form class = "center-align" method="post" action="{{ url_for('qc_log') }}" id="calculator_form">
+            <button class="waves-effect waves-light btn-small red" type="submit" name="log">LOG</button>
+            </form>
+        {% endif %}
+    </div>
+
+    {% endif %}
+    {% if success == False %}
+        <h6 class = "center-align red-text">Fail: {{error}}</h6>
+    {% endif %}
+    </div>
+
+    {% endblock %} 
+</body>
+</html>
