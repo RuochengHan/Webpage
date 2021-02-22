@@ -5,3 +5,5 @@
 5. materialize for textarea with outline somehow not work well
 6. everytime need to refresh the webpage to take effect
 7. html name can be the same, but ID should be different in case of a JS <script> with getID.
+8. For upoading files, need to add: enctype = "multipart/form-data"
+9. For convert byte to string: file.read().decode("utf-8") 
