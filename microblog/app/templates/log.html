@@ -9,7 +9,7 @@
     {% block content %}
     <div class = "row container">
     <br/>
-    <a class="waves-effect waves-light btn-small" href="javascript:history.back()">Back</a>
+    <a class="waves-effect waves-light btn-small" href="javascript:history.go(-1)">Back</a>
     <hr style="width:50%;text-align:left;margin-left:0">
       <script language="JavaScript">
       const logs = {{ logs|tojson }};

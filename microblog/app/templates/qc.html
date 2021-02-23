@@ -16,6 +16,30 @@
     
     <style>
     .tnr {font-family: "Times New Roman", Times, serif;}
+
+    .tabs .tab a {
+      color: #263238 !important;
+      font-weight: 500;
+      background-color: white !important;
+    }
+
+    .tabs .tab a:hover {
+      font-weight: 700;
+      background-color: white !important;
+    }
+
+    .tabs .tab a:focus.active {
+      font-weight: 700;
+      background-color: white !important;
+      /*Custom Background Color While Active*/
+    }
+
+    .tabs .indicator {
+      background-color: #263238 !important;
+      /*Custom Color Of Indicator*/
+    }
+
+
     </style>
   </head>
 <body>
@@ -29,9 +53,29 @@
 
     {% extends "base.html" %}
     {% block content %}
-    <div class = "row container">
-    <h4 class = "center-align"> Diatomic System Quantum Chemistry Calculator</h4>
-    <form method="post" action="{{ url_for('qc_result') }}" id="calculator_form">
+
+    <div class = "row container ">
+
+    <br/>
+    <div>
+      <div class="col s6">
+        <ul class="tabs white">
+          {% if tab == 'general' %}
+            <li class="tab col s4"><a href="#diatom">Diatomic</a></li>
+            <li class="tab col s4"><a class="active" href="#general">General</a></li>
+            <li class="tab col s4 disabled"><a href="#what">Disabled</a></li>
+          {% else %}
+            <li class="tab col s4"><a class="active" href="#diatom">Diatomic</a></li>
+            <li class="tab col s4"><a href="#general">General</a></li>
+            <li class="tab col s4 disabled"><a href="#what">Disabled</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    
+    <br/><br/><br/>
+    <div id="diatom" class="col s12">
+        <h5 class = "center-align"> Diatomic System Quantum Chemistry Calculator</h5>
+        <form method="post" action="{{ url_for('qc_result') }}" id="calculator_form">
         
         <div class="col s4">
         <label for="Atom1">Atom1:</label>
@@ -175,9 +219,10 @@
 
         </script>
 
+
         <br><br><br><br><br><br><br><br><br><br>
         <div class="center-align col s12">
-        <button class="waves-effect waves-light btn" type="submit" name="submit">Submit
+        <button class="waves-effect waves-light btn" type="submit" name="submit" onclick="$('#progressBar').show();">Submit
           <i class="material-icons right">send</i>
         </button>
         &emsp;&emsp;&emsp;
@@ -185,11 +230,190 @@
           <i class="material-icons right">restart_alt</i>
         </button>
         </div>
+
+        <br><br>
+        <div class="col s8 offset-s2 progress" id="progressBar" style="display:none;">
+          <div class="indeterminate"></div>
+        </div>
+
     </form>
-    <br><br>
 
 
 
+    </div>
+
+    <div id="general" class="col s12">
+        <h5 class = "center-align"> Quantum Chemistry Calculator</h5>
+        <form method="post" enctype = "multipart/form-data" action="{{ url_for('qc_result_general') }}" id="calculator_form_general">
+
+
+        <div class="input-field col s6">
+          <textarea id="coord" name="coord" style="height: 172px; resize: none; margin-top: 18px;" placeholder="H 0 0 1&#10H 0 0 2"></textarea>
+          <label for="coord">Coordinates</label>
+
+          <div class="file-field input-field">
+            <div class="waves-effect waves-light btn">
+              <span>File</span>
+              <input name="fcoord" type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="or upload a coordinates file (overwrite)">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="input-field col s3">
+          <select id="charge" name="charge">
+              <option value="0" selected>0</option>
+              <script language="JavaScript">
+              for (var i=1; i <=10; i++)
+              {
+	        document.write("<option value=" + i + ">+" + i + "</option>");
+	          document.write("<option value=" + -i + ">-" + i + "</option>");
+              }
+              </script>
+          </select>
+          <label for="charge">Charge</label>
+        </div>
+        
+        <div class="input-field col s3">        
+        <select id="spin" name="spin">
+            <script language="JavaScript">
+            for (var i=1; i <=10; i++)
+            {
+                document.write("<option value=" + i + ">" + i + "</option>");
+            }
+            $(document).ready(function(){
+              $('select').formSelect();
+            });
+            </script>
+        </select>
+        <label for="spin">Spin (2S+1)</label>
+        </div>
+       
+        <div class="input-field col s3">         
+          <select id="method" name="method">
+            <option value="HF" selected>HF</option>
+            <option value="MP2">MP2</option>
+            <option value="MP2.5">MP2.5</option>
+            <option value="MP4">MP4</option>
+            <option value="CCSD">CCSD</option>
+            <option value="CCSD(T)">CCSD(T)</option>
+          </select>
+        <label for="method">Method</label>
+        </div>
+        
+        <div class="input-field col s3">   
+        <select id="basis" name="basis">
+            <option value="cc-pVDZ" selected>cc-pVDZ</option>
+            <option value="aug-cc-pVDZ">aug-cc-pVDZ</option>
+            <option value="cc-pVTZ">cc-pVTZ</option>
+            <option value="aug-cc-pVTZ">aug-cc-pVTZ</option>
+            <option value="cc-pVQZ">cc-pVQZ</option>
+            <option value="aug-cc-pVQZ">aug-cc-pVQZ</option>
+        </select>
+        <label for="basis">Basis Set</label>
+        </div>
+
+        <div class="col s6">
+          <label for="cores">Cores</label>
+          <p id="s3" name="cores"></p>
+          <input type="hidden" id="cores_g" name="cores" value="">
+        </div>
+
+        <script>
+        var tapslider3 = document.getElementById('s3');
+          noUiSlider.create(tapslider3, {
+           start: 1,
+           behaviour: 'tap',
+           connect: [true, false],
+           step: 1,
+           orientation: 'horizontal',
+           range: {
+             'min': 1,
+             'max': 16,
+           },
+           //tooltips: [wNumb({decimals: 0})], not work
+           format: {
+             from: function(value) {
+               return parseInt(value);
+             },
+             to: function(value) {
+               return parseInt(value);
+             }
+           }
+        });
+
+        var cores = document.getElementById('cores_g');
+        tapslider3.noUiSlider.on('update', function( values, handle ) {
+          cores.value = values[handle];
+        });
+        </script>
+
+        <div class="col s6">
+          <label for="mem">Memory (GB)</label>
+          <p id="s4" name="mem"></p>
+          <input type="hidden" id="mem_g" name="mem" value="">
+        </div>
+
+        <script>
+        var tapslider4 = document.getElementById('s4');
+          noUiSlider.create(tapslider4, {
+           start: 1,
+           behaviour: 'tap',
+           connect: [true, false],
+           orientation: 'horizontal',
+           range: {
+             'min': 1,
+             'max': 64,
+           },
+        });
+
+        var mem = document.getElementById('mem_g');
+        tapslider4.noUiSlider.on('update', function( values, handle ) {
+          mem.value = values[handle];
+        });
+
+        </script>
+
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <div class="center-align col s12">
+        <button class="waves-effect waves-light btn" type="submit" name="submit" onclick="$('#progressBar_g').show();">Submit
+          <i class="material-icons right">send</i>
+        </button>
+        &emsp;&emsp;&emsp;
+        <button class="waves-effect waves-light btn" type="reset" name="reset">Reset
+          <i class="material-icons right">restart_alt</i>
+        </button>
+        </div>
+
+        <br><br>
+        <div class="col s8 offset-s2 progress" id="progressBar_g" style="display:none;">
+          <div class="indeterminate"></div>
+        </div>
+
+    </form>
+
+
+    </div>
+
+
+    <br/><br/>
+    </div>
+    <script>
+      $(document).ready(function(){
+        $('.tabs').tabs();
+      });
+    </script>
+
+
+
+
+
+
+
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     <div class="col s4 offset-s4"> 
     {% if success == True %}
         {% if isresult == True %}

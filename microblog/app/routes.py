@@ -3,7 +3,7 @@ from app import app
 import os
 import sys
 sys.path.insert(1, '/scratch/ruhan/web/microblog/app/kernels')
-from qc_calcu import qc_psi4
+from qc_calcu import *
 
 def isfloat(value):
   try:
@@ -115,18 +115,16 @@ def qc_result():
   cores = request.form['cores']
   mem = request.form['mem']
 
-  print(cores)
-  print(mem)
-
   atom_list = ['H','He','Li','Be','B','C','N','O','F','Ne']
   tmp = [x.lower() for x in atom_list]
   atom_list.extend(tmp)
 
+
   if (atom1 not in atom_list) or (atom2 not in atom_list):
-    return render_template('qc.html', success=False, error='Atom type not supported')
+    return render_template('qc.html', success=False, error='Atom type not supported', tab='diatom')
 
   elif not isfloat(distance):
-    return render_template('qc.html', success=False, error='Distance input error')
+    return render_template('qc.html', success=False, error='Distance input error', tab='diatom')
 
   elif abs(float(distance)) > 8.0:
     return render_template('qc.html', success=False, error='Distance cannot be larger than 8.0 A')
@@ -135,10 +133,40 @@ def qc_result():
     os.chdir('/scratch/ruhan/web/microblog/qc_tmp/')
     try:
       energy = qc_psi4(atom1, atom2, distance, charge, spin, method, basis, cores, mem)
-      return render_template('qc.html', success=True, isresult=True, atom1=atom1, atom2=atom2, distance=distance, result=energy, charge=charge, spin=spin, method=method, basis=basis)
+      return render_template('qc.html', success=True, isresult=True, atom1=atom1, atom2=atom2, distance=distance, result=energy, charge=charge, spin=spin, method=method, basis=basis, tab='diatom')
 
     except:
-      return render_template('qc.html', success=True, isresult=False, error='Unknown failure')
+      return render_template('qc.html', success=True, isresult=False, error='Unknown failure', tab='diatom')
+
+
+@app.route('/qc_result_general', methods=['POST'])
+def qc_result_general():
+
+  method = request.form['method']
+  basis = request.form['basis']
+  charge = request.form['charge']
+  spin = request.form['spin']
+  cores = request.form['cores']
+  mem = request.form['mem']
+
+  if request.files['fcoord'].filename == '':
+    print('no')
+    if request.form.get('coord') is '':
+      return render_template('qc.html', success=False, error='No coord input', tab='general')
+    else:
+      coord = request.form.get('coord')
+  else:
+    fcoord = request.files['fcoord']
+    coord = fcoord.read().decode("utf-8") 
+
+  try:
+    os.chdir('/scratch/ruhan/web/microblog/qc_tmp/')
+    energy = qc_psi4_general(coord, charge, spin, method, basis, cores, mem)
+
+    return render_template('qc.html', success=True, isresult=True, atom1='', atom2='', distance='coord', result=energy, charge=charge, spin=spin, method=method, basis=basis, tab='general')
+  
+  except:
+    return render_template('qc.html', success=True, isresult=False, error='Unknown failure', tab='general')
 
 @app.route('/qc_log', methods=['POST'])
 def qc_log():
