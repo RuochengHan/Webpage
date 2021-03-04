@@ -10,3 +10,4 @@
 10. For convert byte to string: file.read().decode("utf-8") 
 11. For upoading files, Use request.files['name'].filename == '' to check whether it is uploaded
 12. submit with a progress bar: add onclick="$('#progressBar_g').show();" in submit button; add style="display:none;" in progress bar.
+13. after modifying config.py file, should restart flask
