@@ -1,0 +1,25 @@
+<html>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Benne&display=swap');
+  .benne {font-family: 'Benne', serif;}
+  .tnr {font-family: "Times New Roman", Times, serif;}
+  </style>
+  <body>
+    {% extends "base.html" %}
+    {% block content %}
+    <div class = "row container">
+    <br/>
+    <a class="waves-effect waves-light btn-small" href="javascript:history.go(-1)">Back</a>
+    <hr style="width:50%;text-align:left;margin-left:0">
+      <script language="JavaScript">
+      const logs = {{ logs|tojson }};
+      l = logs.length
+      for (var i = 0; i < l; i++)
+      {
+        document.write("<p class='tnr'>" + logs[i] + "</p>");
+      }
+      </script>
+    </div>
+    {% endblock%}
+  </body>
+<html> 

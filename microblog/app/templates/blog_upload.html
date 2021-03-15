@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class = "row container ">
+  <h5>Hi, {{ current_user.username }}!</h5>
+  <form method="post" enctype = "multipart/form-data">
+    {{ form.hidden_tag() }}
+    <p>
+      {{ form.post.label }}<br>
+      {{ form.post(cols=16, rows=1) }}<br>
+      {% for error in form.post.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </p>
+
+    <div class="file-field input-field">
+      <div class="waves-effect waves-light btn">
+        <span>File</span>
+        <input name="fpost" type="file">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="a file of post">
+      </div>
+    </div>
+
+
+    <div class="center-align col s12">
+    <button class="waves-effect waves-light btn" type="submit" name="submit">Submit
+    <i class="material-icons right">send</i>
+    </button>
+    </div>
+
+  </form>
+  {% for post in posts %}
+  <p>
+  {{ post.author.username }}'s post: <b>{{ post.body }}</b>
+  </p>
+  {% endfor %}
+  </div>
+{% endblock %}

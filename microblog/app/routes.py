@@ -1,5 +1,8 @@
-from flask import render_template, request
-from app import app
+from flask import render_template, request, flash, redirect, url_for
+from app import app, db
+from app.forms import LoginForm, PostForm
+from flask_login import current_user, login_user, logout_user, login_required
+from app.models import User, Post
 import os
 import sys
 sys.path.insert(1, '/scratch/ruhan/web/microblog/app/kernels')
@@ -17,6 +20,60 @@ def isfloat(value):
 @app.route('/index')
 def index():
   return render_template('index.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+  if current_user.is_authenticated:
+    return redirect(url_for('index'))
+  form = LoginForm()
+  if form.validate_on_submit():
+    user = User.query.filter_by(username=form.username.data).first()
+    if user is None or not user.check_password(form.password.data):
+      flash('Invalid username or password')
+      return redirect(url_for('login'))
+    login_user(user, remember=form.remember_me.data)
+    return redirect(url_for('index'))
+  return render_template('login.html', title='Sign In', form=form)
+
+@app.route('/logout')
+def logout():
+  logout_user()
+  return redirect(url_for('index'))
+
+@app.route('/blog_upload', methods=['GET', 'POST'])
+def blog_upload():
+  if not current_user.is_authenticated:
+    return redirect(url_for('login'))
+  form = PostForm()
+  if form.validate_on_submit():
+    post = Post(body=form.post.data, author=current_user)
+    db.session.add(post)
+    db.session.commit()
+    if request.files['fpost'].filename == '':
+      print('no')
+    else:
+      fpost = request.files['fpost']
+      post_content = fpost.read().decode("utf-8")
+      with open("/scratch/ruhan/web/microblog/blogs/"+str(form.post.data)+".txt", "a+") as fblog:
+        fblog.write(post_content) 
+      flash('Your blog is now live!')
+    #return redirect(url_for('blog'))
+  posts = Post.query.order_by(Post.timestamp.desc()).all()
+  return render_template('blog_upload.html', posts=posts, form=form)
+
+@app.route('/blog_all')
+def blog_all():
+  form = PostForm()
+  posts = Post.query.order_by(Post.timestamp.desc()).all()
+  return render_template('blog_all.html', posts=posts, form=form)
+
+@app.route('/blog_<string:blog_name>')
+# and tag
+def blog(blog_name):
+  posts = Post.query.order_by(Post.timestamp.desc()).all()
+  with open("/scratch/ruhan/web/microblog/blogs/"+str(blog_name)+".txt", "r") as f:
+    logs = f.readlines()
+  return render_template('blog.html', logs=logs)
 
 @app.route('/test')
 def test():

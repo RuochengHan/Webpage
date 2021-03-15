@@ -92,9 +92,27 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="/calculator">Calculator</a></li>
           <li><a class="dropdown-trigger" href="/index" data-target="dropdown1" data-beloworigin="true" >Quantum Chemistry<i class="material-icons right">keyboard_arrow_down</i></a></li>
+
+          {% if current_user.is_anonymous %}
+          <li><a href="{{ url_for('login') }}">Login</a></li>
+          {% else %}
+          <li><a href="{{ url_for('logout') }}">Logout</a></li>
+          {% endif %}
+
         </ul>
       </div>
     </nav>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
     {% block content %}{% endblock %}
 
     <button id="scroll" type="button"><i class="material-icons icon-white">arrow_upward</i></button>

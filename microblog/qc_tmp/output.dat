@@ -1,15 +1,15 @@
   Threads set to 1 by Python driver.
 
 *** tstart() called on localhost.localdomain
-*** at Tue Feb 23 15:02:17 2021
+*** at Mon Mar 15 16:57:47 2021
 
    => Loading Basis Set <=
 
-    Name: AUG-CC-PVTZ
+    Name: CC-PVDZ
     Role: ORBITAL
     Keyword: BASIS
-    atoms 1 entry F          line   373 file /home/michaelbishop/anaconda3/envs/flask/share/psi4/basis/aug-cc-pvtz.gbs 
-    atoms 2 entry H          line    36 file /home/michaelbishop/anaconda3/envs/flask/share/psi4/basis/aug-cc-pvtz.gbs 
+    atoms 1 entry F          line   228 file /home/michaelbishop/anaconda3/envs/flask/share/psi4/basis/cc-pvdz.gbs 
+    atoms 2 entry H          line    22 file /home/michaelbishop/anaconda3/envs/flask/share/psi4/basis/cc-pvdz.gbs 
 
 
          ---------------------------------------------------------
@@ -29,14 +29,14 @@
 
        Center              X                  Y                   Z               Mass       
     ------------   -----------------  -----------------  -----------------  -----------------
-         F            0.000000000000     0.000000000000    -0.100751128340    18.998403162730
-         H            0.000000000000     0.000000000000     1.899248871660     1.007825032230
+         F            0.000000000000     0.000000000000    -0.050375564170    18.998403162730
+         H            0.000000000000     0.000000000000     0.949624435830     1.007825032230
 
   Running in c1 symmetry.
 
-  Rotational constants: A = ************  B =      4.40352  C =      4.40352 [cm^-1]
-  Rotational constants: A = ************  B = 132014.05934  C = 132014.05934 [MHz]
-  Nuclear repulsion =    2.381297448015000
+  Rotational constants: A = ************  B =     17.61406  C =     17.61406 [cm^-1]
+  Rotational constants: A = ************  B = 528056.23735  C = 528056.23735 [MHz]
+  Nuclear repulsion =    4.762594896030000
 
   Charge       = 0
   Multiplicity = 1
@@ -46,7 +46,7 @@
 
   ==> Algorithm <==
 
-  SCF Algorithm Type is PK.
+  SCF Algorithm Type is DF.
   DIIS enabled.
   MOM disabled.
   Fractional occupation disabled.
@@ -57,68 +57,73 @@
 
   ==> Primary Basis <==
 
-  Basis Set: AUG-CC-PVTZ
-    Blend: AUG-CC-PVTZ
-    Number of shells: 23
-    Number of basis function: 69
-    Number of Cartesian functions: 80
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 9
+    Number of basis function: 19
+    Number of Cartesian functions: 20
     Spherical Harmonics?: true
-    Max angular momentum: 3
+    Max angular momentum: 2
+
+   => Loading Basis Set <=
+
+    Name: (CC-PVDZ AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1 entry F          line   271 file /home/michaelbishop/anaconda3/envs/flask/share/psi4/basis/cc-pvdz-jkfit.gbs 
+    atoms 2 entry H          line    51 file /home/michaelbishop/anaconda3/envs/flask/share/psi4/basis/cc-pvdz-jkfit.gbs 
 
   ==> Pre-Iterations <==
 
    -------------------------------------------------------
     Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
    -------------------------------------------------------
-     A         69      69       0       0       0       0
+     A         19      19       0       0       0       0
    -------------------------------------------------------
-    Total      69      69       5       5       5       0
+    Total      19      19       5       5       5       0
    -------------------------------------------------------
 
   ==> Integral Setup <==
 
-  Using in-core PK algorithm.
-   Calculation information:
-      Number of atoms:                   2
-      Number of AO shells:              23
-      Number of primitives:             41
-      Number of atomic orbitals:        80
-      Number of basis functions:        69
+  DFHelper Memory: AOs need 0.000 GiB; user supplied 0.698 GiB. Using in-core AOs.
 
-      Integral cutoff                 1.00e-12
-      Number of threads:                 1
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
 
-  Performing in-core PK
-  Using 5834640 doubles for integral storage.
-  We computed 38226 shell quartets total.
-  Whereas there are 38226 unique shell quartets.
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory [MiB]:               715
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-10
 
-  ==> DiskJK: Disk-Based J/K Matrices <==
+   => Auxiliary Basis Set <=
 
-    J tasked:                  Yes
-    K tasked:                  Yes
-    wK tasked:                  No
-    Memory [MiB]:              715
-    Schwarz Cutoff:          1E-12
+  Basis Set: (CC-PVDZ AUX)
+    Blend: CC-PVDZ-JKFIT
+    Number of shells: 33
+    Number of basis function: 93
+    Number of Cartesian functions: 106
+    Spherical Harmonics?: true
+    Max angular momentum: 3
 
-    OpenMP threads:              1
-
-  Minimum eigenvalue in the overlap matrix is 7.4271266572E-03.
+  Minimum eigenvalue in the overlap matrix is 6.0264792053E-02.
   Using Symmetric Orthogonalization.
 
   SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF.
 
   ==> Iterations <==
 
-                        Total Energy        Delta E     RMS |[F,P]|
+                           Total Energy        Delta E     RMS |[F,P]|
 
-   @RHF iter SAD:   -99.22080358621233   -9.92208e+01   0.00000e+00 
-   @RHF iter   1:   -99.65135596936607   -4.30552e-01   7.41151e-03 DIIS
-   @RHF iter   2:   -99.54335126365295    1.08005e-01   1.25406e-02 DIIS
-   @RHF iter   3:   -99.79547101243681   -2.52120e-01   9.05839e-04 DIIS
-   @RHF iter   4:   -99.79821787181024   -2.74686e-03   7.60262e-04 SOSCF, nmicro=5
-   @RHF iter   5:   -99.79998125274437   -1.76338e-03   1.67944e-05 SOSCF, nmicro=5
-   @RHF iter   6:   -99.79998181173339   -5.58989e-07   1.51027e-07 SOSCF, nmicro=conv
+   @DF-RHF iter SAD:   -99.55449880392972   -9.95545e+01   0.00000e+00 
+   @DF-RHF iter   1:   -99.96742688081240   -4.12928e-01   1.68462e-02 DIIS
+   @DF-RHF iter   2:   -99.99943871733393   -3.20118e-02   9.94563e-03 DIIS
+   @DF-RHF iter   3:  -100.00948555480883   -1.00468e-02   1.06376e-03 SOSCF, nmicro=5
+   @DF-RHF iter   4:  -100.00985994515420   -3.74390e-04   6.18037e-06 SOSCF, nmicro=5
+   @DF-RHF iter   5:  -100.00985995185627   -6.70207e-09   2.46579e-08 SOSCF, nmicro=conv
   Energy and wave function converged.
 
 
@@ -129,46 +134,29 @@
 
     Doubly Occupied:                                                      
 
-       1A    -26.266855     2A     -1.463040     3A     -0.582449  
-       4A     -0.582449     5A     -0.497385  
+       1A    -26.279281     2A     -1.557455     3A     -0.714910  
+       4A     -0.621195     5A     -0.621195  
 
     Virtual:                                                              
 
-       6A     -0.112941     7A      0.053547     8A      0.178539  
-       9A      0.178539    10A      0.195255    11A      0.263317  
-      12A      0.263317    13A      0.270402    14A      0.363815  
-      15A      0.528392    16A      0.735199    17A      0.735199  
-      18A      0.777822    19A      0.777822    20A      0.861927  
-      21A      0.926795    22A      0.926795    23A      0.976423  
-      24A      0.976423    25A      1.021950    26A      1.137916  
-      27A      1.137916    28A      1.138119    29A      1.287852  
-      30A      1.287852    31A      1.618520    32A      1.984878  
-      33A      2.525850    34A      2.932090    35A      2.932090  
-      36A      2.937763    37A      2.937763    38A      2.973410  
-      39A      3.000278    40A      3.000278    41A      3.002069  
-      42A      3.002069    43A      3.140756    44A      3.140756  
-      45A      3.227800    46A      3.699167    47A      3.699167  
-      48A      3.756355    49A      3.756355    50A      3.931028  
-      51A      3.931028    52A      4.010447    53A      4.321574  
-      54A      5.301186    55A      5.301186    56A      5.615485  
-      57A      8.881358    58A      8.881358    59A      8.896252  
-      60A      8.896252    61A      8.916779    62A      8.916779  
-      63A      9.031998    64A      9.357528    65A      9.357528  
-      66A      9.405276    67A      9.405276    68A      9.489840  
-      69A     11.133336  
+       6A      0.164493     7A      0.737655     8A      1.383290  
+       9A      1.383290    10A      1.446837    11A      1.616511  
+      12A      1.616511    13A      2.133659    14A      2.302124  
+      15A      4.012625    16A      4.012625    17A      4.208020  
+      18A      4.208020    19A      4.935950  
 
     Final Occupation by Irrep:
               A 
     DOCC [     5 ]
 
-  @RHF Final Energy:   -99.79998181173339
+  @DF-RHF Final Energy:  -100.00985995185627
 
    => Energetics <=
 
-    Nuclear Repulsion Energy =              2.3812974480150002
-    One-Electron Energy =                -145.5782020943345287
-    Two-Electron Energy =                  43.3969228345861424
-    Total Energy =                        -99.7999818117333746
+    Nuclear Repulsion Energy =              4.7625948960300004
+    One-Electron Energy =                -149.9568382906134900
+    Two-Electron Energy =                  45.1843834427272100
+    Total Energy =                       -100.0098599518562708
 
 Computation Completed
 
@@ -178,238 +166,24 @@ Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
 Properties computed using the SCF density matrix
 
   Nuclear Dipole Moment: [e a0]
-     X:     0.0000      Y:     0.0000      Z:     1.8755
+     X:     0.0000      Y:     0.0000      Z:     0.9378
 
   Electronic Dipole Moment: [e a0]
-     X:     0.0000      Y:     0.0000      Z:    -0.1561
+     X:     0.0000      Y:    -0.0000      Z:    -0.1056
 
   Dipole Moment: [e a0]
-     X:     0.0000      Y:     0.0000      Z:     1.7194     Total:     1.7194
+     X:     0.0000      Y:    -0.0000      Z:     0.8322     Total:     0.8322
 
   Dipole Moment: [D]
-     X:     0.0000      Y:     0.0000      Z:     4.3703     Total:     4.3703
+     X:     0.0000      Y:    -0.0000      Z:     2.1152     Total:     2.1152
 
 
-*** tstop() called on localhost.localdomain at Tue Feb 23 15:02:18 2021
+*** tstop() called on localhost.localdomain at Mon Mar 15 16:57:47 2021
 Module time:
-	user time   =       0.92 seconds =       0.02 minutes
-	system time =       0.02 seconds =       0.00 minutes
-	total time  =          1 seconds =       0.02 minutes
-Total time:
-	user time   =      98.53 seconds =       1.64 minutes
-	system time =      31.95 seconds =       0.53 minutes
-	total time  =        625 seconds =      10.42 minutes
- MINTS: Wrapper to libmints.
-   by Justin Turney
-
-   Calculation information:
-      Number of threads:                 1
-      Number of atoms:                   2
-      Number of AO shells:              23
-      Number of SO shells:              23
-      Number of primitives:             41
-      Number of atomic orbitals:        80
-      Number of basis functions:        69
-
-      Number of irreps:                  1
-      Integral cutoff                 1.00e-12
-      Number of functions per irrep: [  69 ]
-
- OEINTS: Overlap, kinetic, potential, dipole, and quadrupole integrals
-         stored in file 35.
-
-      Computing two-electron integrals...done
-      Computed 564073 non-zero two-electron integrals.
-        Stored in file 33.
-
-
-*** tstart() called on localhost.localdomain
-*** at Tue Feb 23 15:02:18 2021
-
-        ==> Transform all two-electron integrals <==
-
-	Presorting SO-basis two-electron integrals.
-	Sorting File: SO Ints (nn|nn) nbuckets = 1
-	Transforming the one-electron integrals and constructing Fock matrices
-	Starting first half-transformation.
-	Sorting half-transformed integrals.
-	First half integral transformation complete.
-	Starting second half-transformation.
-	Two-electron integral transformation complete.
-
-*** tstop() called on localhost.localdomain at Tue Feb 23 15:02:19 2021
-Module time:
-	user time   =       0.71 seconds =       0.01 minutes
-	system time =       0.18 seconds =       0.00 minutes
-	total time  =          1 seconds =       0.02 minutes
-Total time:
-	user time   =      99.40 seconds =       1.66 minutes
-	system time =      32.14 seconds =       0.54 minutes
-	total time  =        626 seconds =      10.43 minutes
-
-*** tstart() called on localhost.localdomain
-*** at Tue Feb 23 15:02:19 2021
-
-
-        **********************************************************
-        *                                                        *
-        *                   CCSD Integral Sort                   *
-        *                                                        *
-        **********************************************************
-
-
-        CC integral sort will use                    198.05 mb
-
-        Number of (ab|cd) temporary files:                2
-        Number of (ab|ci) temporary files:                3
-        Starting temporary file number:                 270
-
-        Initial sort........done.
-
-        Sort (IJ|KL)........done.
-        Sort (IJ|KA) 1/2....done.
-        Sort (IJ|KA) 2/2....done.
-        Sort (IA|JB)........done.
-        Sort (IJ|AB)........done.
-        Sort (IA|BC) 1/3....done.
-        Sort (IA|BC) 2/3....done.
-        Sort (IA|BC) 3/3....done.
-        Sort (AB|CD) 1/2....done.
-        Sort (AB|CD) 2/2....done.
-
-
-*** tstop() called on localhost.localdomain at Tue Feb 23 15:02:19 2021
-Module time:
-	user time   =       0.22 seconds =       0.00 minutes
-	system time =       0.20 seconds =       0.00 minutes
+	user time   =       0.41 seconds =       0.01 minutes
+	system time =       0.01 seconds =       0.00 minutes
 	total time  =          0 seconds =       0.00 minutes
 Total time:
-	user time   =      99.62 seconds =       1.66 minutes
-	system time =      32.34 seconds =       0.54 minutes
-	total time  =        626 seconds =      10.43 minutes
-
-*** tstart() called on localhost.localdomain
-*** at Tue Feb 23 15:02:19 2021
-
-
-
-        *****************************************************
-        *                                                   *
-        *                        MP4                        *
-        *                  Eugene DePrince                  *
-        *                                                   *
-        *****************************************************
-
-
-
-  ==> Input parameters <==
-
-        Freeze core orbitals?                  no
-        Use frozen natural orbitals?           no
-        r_convergence:                  1.000e-07
-        e_convergence:                  1.000e-06
-        Number of DIIS vectors:                 8
-        Number of frozen core orbitals:         0
-        Number of active occupied orbitals:     5
-        Number of active virtual orbitals:     64
-        Number of frozen virtual orbitals:      0
-
-  ==> Memory <==
-
-        available memory =                            953.67 mb
-        minimum memory requirements for QCISD =         2.42 mb
-        memory requirements for QCISD(T) =              7.63 mb
-
-  ==> Define tiling <==
-
-        v(ab,cd) diagrams will be evaluated in   1 blocks.
-        v(ab,ci) diagrams will be evaluated in   1 blocks over ov2.
-        v(ab,ci) diagrams will be evaluated in   1 blocks over ov.
-
-  Allocate cpu memory (    35.42 mb).....done.
-  Initialize cpu memory..................done.
-
-  ==> MP4(SDQ) <==
-
-        1st-order doubles amplitudes...............done.
-        MP2 energy.................................done.
-        MP3 energy.................................done.
-        2nd-order singles and doubles amplitudes...done.
-        MP4(SD)....................................done.
-        MP4(Q).....................................done.
-
-        OS MP2 correlation energy:            -0.265095815123
-        SS MP2 correlation energy:            -0.082703414014
-        MP2 correlation energy:               -0.347799229137
-      * MP2 total energy:                   -100.147781040871
-
-        OS MP2.5 correlation energy:          -0.221681535984
-        SS MP2.5 correlation energy:          -0.240211358010
-        MP2.5 correlation energy:             -0.340668701819
-      * MP2.5 total energy:                 -100.140650513552
-
-        OS MP3 correlation energy:            -0.222449892698
-        SS MP3 correlation energy:            -0.232312473976
-        MP3 correlation energy:               -0.333538174500
-      * MP3 total energy:                   -100.133519986233
-
-        OS MP4(SDQ) correlation energy:       -0.240452662381
-        SS MP4(SDQ) correlation energy:       -0.221696132971
-        MP4(SDQ) correlation energy:          -0.352463305989
-      * MP4(SDQ) total energy:              -100.152445117722
-
-
-*** tstop() called on localhost.localdomain at Tue Feb 23 15:02:19 2021
-Module time:
-	user time   =       0.13 seconds =       0.00 minutes
-	system time =       0.04 seconds =       0.00 minutes
+	user time   =       0.41 seconds =       0.01 minutes
+	system time =       0.01 seconds =       0.00 minutes
 	total time  =          0 seconds =       0.00 minutes
-Total time:
-	user time   =      99.75 seconds =       1.66 minutes
-	system time =      32.38 seconds =       0.54 minutes
-	total time  =        626 seconds =      10.43 minutes
-
-*** tstart() called on localhost.localdomain
-*** at Tue Feb 23 15:02:19 2021
-
-
-        *******************************************************
-        *                                                     *
-        *                       MP4(T)                        *
-        *                                                     *
-        *******************************************************
-
-        num_threads:                      1
-        available memory:         953.67 mb
-        memory requirements:        7.63 mb
-
-        Number of ijk combinations: 35
-
-        Computing (T) correction...
-
-        % complete  total time
-              11.4         0 s
-              20.0         0 s
-              31.4         1 s
-              40.0         1 s
-              51.4         1 s
-              60.0         1 s
-              71.4         1 s
-              80.0         1 s
-              91.4         1 s
-
-        MP4(T) correlation energy:              -0.021839331849
-
-        MP4(SDTQ) correlation energy:           -0.374302637838
-      * MP4(SDTQ) total energy:               -100.174284449571
-
-
-*** tstop() called on localhost.localdomain at Tue Feb 23 15:02:20 2021
-Module time:
-	user time   =       0.59 seconds =       0.01 minutes
-	system time =       0.03 seconds =       0.00 minutes
-	total time  =          1 seconds =       0.02 minutes
-Total time:
-	user time   =     100.34 seconds =       1.67 minutes
-	system time =      32.41 seconds =       0.54 minutes
-	total time  =        627 seconds =      10.45 minutes

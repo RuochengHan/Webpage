@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <br/>
+  <h5 class = "center-align">Sign In</h5>
+  <div class = "row container ">
+  <div class="col s4 offset-s4">
+  <form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+      {{ form.username.label }}<br>
+      {{ form.username(size=32) }}
+      {% for error in form.username.errors %}
+      <span style="color: red;">{{ error }}</span>
+      {% endfor %}
+    </p>
+    <p>
+      {{ form.password.label }}<br>
+      {{ form.password(size=32) }}
+      {% for error in form.password.errors %}
+      <span style="color: red;">{{ error }}</span>
+      {% endfor %}
+    </p>
+    <br/>
+    <button class="waves-effect waves-light btn" type="submit" name="submit">Sign In
+    </button>
+  </form>
+  </div></div>
+{% endblock %}
