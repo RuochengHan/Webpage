@@ -12,3 +12,8 @@
 12. Submit with a progress bar: add onclick="$('#progressBar_g').show();" in submit button; add style="display:none;" in progress bar.
 13. After modifying config.py file, should restart flask
 14. Remove app.db and migrations/ before falsk db init
+15. Transfer from HTML to python flask, becare do not use "sth/<string:blog_name>", otherwise the style do not work
+```python
+  @web.route('/sth_<string:blog_name>')
+  def sth(blog_name):
+```
