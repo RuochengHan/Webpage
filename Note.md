@@ -25,5 +25,5 @@ otherwise the style do not work.
 
 16. Use another URL in form submit:
 ```html
-<input type="submit" value="Go Elsewhere" formaction="/elsewhere">
+<button type="submit" value="Go Elsewhere" formaction="/elsewhere">
 ```
