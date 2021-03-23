@@ -22,5 +22,8 @@ be are do not use:
 sth/<string:blog_name>
 ```
 otherwise the style do not work.
-  
- 
+
+16. Use another URL in form submit:
+```html
+<input type="submit" value="Go Elsewhere" formaction="/elsewhere">
+```
