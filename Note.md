@@ -29,3 +29,9 @@ otherwise the style do not work.
 ```
 17. Return page with the same input-field by back attribute value of request.form.get('sth') to <textarea>sth</textarea>. File somehow not work, \
 so use textarea to show
+
+  
+18. Need to use | tojson to convert local file format to json in webpage (further read by .getJSON).
+```javascript
+{{ yourjson | tojson }}
+```
