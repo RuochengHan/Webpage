@@ -17,7 +17,7 @@
   @web.route('/sth_<string:blog_name>')
   def sth(blog_name):
 ```
-be are do not use:
+but do not use:
 ```python
 sth/<string:blog_name>
 ```
@@ -34,4 +34,11 @@ so use textarea to show
 18. Need to use | tojson to convert local file format to json in webpage (further read by .getJSON).
 ```javascript
 {{ yourjson | tojson }}
+```
+  
+19. Use javascript to pass variable to url_for('web', var=variable1) does not work, because it client (js) will ask 
+  server (flask) for URL after rendering, which is not possible.
+```javascript
+{{ url_for('webpage', var=variable1) }} // not work, jinja complains and variable are not translated.
+'domain/webpage', var=variable1 // easiest way is to decode it yourself
 ```
