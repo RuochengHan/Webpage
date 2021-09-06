@@ -45,6 +45,6 @@ so use textarea to show
 
 20. javascript reverse the item in for loop:
 ```javascript
-$.each(JSON.parse(data).reverse(), funcrtion(key, value){...
+$.each(JSON.parse(data).reverse(), function(key, value){...
 ```
 
