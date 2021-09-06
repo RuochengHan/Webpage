@@ -42,3 +42,9 @@ so use textarea to show
 {{ url_for('webpage', var=variable1) }} // not work, jinja complains and variable are not translated.
 'domain/webpage', var=variable1 // easiest way is to decode it yourself
 ```
+
+20. javascript reverse the item in for loop:
+```javascript
+$.each(JSON.parse(data).reverse(), funcrtion(key, value){...
+```
+
