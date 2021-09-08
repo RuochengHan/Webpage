@@ -48,3 +48,9 @@ so use textarea to show
 $.each(JSON.parse(data).reverse(), function(key, value){...
 ```
 
+21. for scrolling down, using:
+```javascript
+$(this).scrollTop()
+document.body.scrollHeight
+// clientHeight or number(one scroll=100)
+```
