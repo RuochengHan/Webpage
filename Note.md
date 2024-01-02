@@ -54,3 +54,10 @@ $(this).scrollTop()
 document.body.scrollHeight
 // clientHeight or number(one scroll=100)
 ```
+
+22. select need, otherwise not correctly rendered:
+```javascript
+$(document).ready(function(){
+$('select').formSelect();
+});
+```
